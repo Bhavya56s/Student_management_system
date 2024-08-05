@@ -18,7 +18,7 @@ async function bootstrap() {
   },"JWT-Auth")
   .build();
 const document = SwaggerModule.createDocument(app, config);
-SwaggerModule.setup('api', app, document);
+SwaggerModule.setup('apis', app, document);
   await app.listen(3000);
 }
 bootstrap();

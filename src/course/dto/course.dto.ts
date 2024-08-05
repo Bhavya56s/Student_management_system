@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsOptional } from "class-validator";
 
 export class CreateCourseDto{
   @ApiProperty()
@@ -9,4 +9,14 @@ export class CreateCourseDto{
   @ApiProperty()
   @IsNotEmpty()
   fees:number;
+}
+
+export class UpdateCourseDto{
+  @ApiProperty()
+  @IsOptional()
+  name:string
+
+  @ApiProperty()
+  @IsOptional()
+  fees:number
 }
