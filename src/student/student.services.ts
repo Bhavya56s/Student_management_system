@@ -4,6 +4,7 @@ import { Student } from "./entity/student.entity";
 import { Repository } from "typeorm";
 import { Course } from "src/course/entity/course.entity";
 import { CreateStudentDto, UpdateStudentDto } from "./dto/student.dto";
+import { classToPlain } from "class-transformer";
 
 @Injectable()
 
@@ -32,18 +33,20 @@ export class StudentServices{
     }
 
 
-    async findAll():Promise<Student[]>{
-      return this.studentRepository.find({ relations: ['course'] });
+    async findAll():Promise<any>{
+       const student = this.studentRepository.find({ relations: ['course'] });
+
+       return classToPlain(student)
     }
 
-    async findById(id:number):Promise<Student>{
+    async findById(id:number):Promise<any>{
        
       const student = await this.studentRepository.findOne({where:{id},relations : ['course']})
       if(!student){
         throw new NotFoundException(`Student with ID ${id} not found`)
       }
 
-      return student
+      return classToPlain(student)
     }
 
     async remove(id:number):Promise<{message:string}>{

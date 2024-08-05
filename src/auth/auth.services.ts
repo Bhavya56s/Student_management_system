@@ -1,7 +1,7 @@
 import {  Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Admin, Repository } from "typeorm";
+import {  Repository } from "typeorm";
 import { LoginDto, SignupDto } from "./dto/auth.dto";
 import * as bcrypt from 'bcryptjs';
 import { Admins } from "src/admin/entity/admin.entity";
