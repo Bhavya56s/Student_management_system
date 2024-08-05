@@ -18,13 +18,10 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, Pri
   @IsEmail()
   email:string;
 
-  @Column({nullable:false})
-  @Exclude()
-  @MinLength(6)
-  password:string;
+ 
 
   @ManyToOne(() => Course, (course) => course.students,{onDelete:'CASCADE'})
-  @JoinColumn({ name: 'studentId' })
+  @JoinColumn({ name: 'CourseId' })
   course: Course;
 
   @OneToMany(() => FeeSubmission, (feeSubmission) => feeSubmission.student,{onDelete:'CASCADE',cascade:true})

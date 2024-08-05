@@ -10,6 +10,7 @@ export class CourseService{
   constructor(@InjectRepository(Course)
 private courseRepository:Repository<Course>){}
 
+
 async createCourse(createCourseDto:CreateCourseDto):Promise<{message:string}>{
   
   const course = this.courseRepository.create(createCourseDto)
@@ -21,9 +22,13 @@ async createCourse(createCourseDto:CreateCourseDto):Promise<{message:string}>{
 
   return {message:`${courses.name} sucessfully created`}
 }
+
+
 async findCourse():Promise<Course[]>{
   return (this.courseRepository.find())
 }
+
+
 async findCourseById(id:number):Promise<Course>{
   
   const course = await this.courseRepository.findOne({where : {id}})
@@ -32,14 +37,23 @@ async findCourseById(id:number):Promise<Course>{
   }
   return course
 }
+
+
 async removeCourse(id:number):Promise<{message:string}>{
 
-  const course = await this.courseRepository.delete(id)
+  const course = await this.courseRepository.findOne({where:{id}})
   if(!course){
+    throw new NotFoundException(`Course with ID ${id} not found`)
+  }
+
+  const remove = await this.courseRepository.delete(id)
+  if(!remove){
     throw new NotFoundException(`Course with ${id} not found`)
   }
   return {message:`Course with id ${id} deleted sucessfully`}
 }
+
+
 async updateCourse(id:number,updateCourseDto:UpdateCourseDto):Promise<{message:string}>{
 
   const course = await this.courseRepository.findOne({where:{id}})
