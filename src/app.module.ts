@@ -4,6 +4,11 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ConfigModule } from '@nestjs/config';
+import { CourseModule } from './course/course.module';
+import { FeeSubmission } from './fees/entity/fees.entity';
+import { FeeSubmissionModule } from './fees/fees.module';
+import { StudentModule } from './student/student.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,7 +27,7 @@ import { ConfigModule } from '@nestjs/config';
     synchronize:true
     
   }),
-
+CourseModule,FeeSubmissionModule,StudentModule,AuthModule
 ],
   controllers: [AppController],
   providers: [AppService],
