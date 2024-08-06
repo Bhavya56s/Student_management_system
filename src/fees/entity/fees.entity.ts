@@ -13,6 +13,7 @@ export class FeeSubmission{
   @Column('decimal', { precision: 10, scale: 2 })
   Remaining:number;
 
+  
   @ManyToOne(() => Student, (student) => student.feeSubmissions,{onDelete:'CASCADE'})
   @JoinColumn({ name: 'studentId' })
   student: Student;
